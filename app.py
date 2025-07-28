@@ -31,6 +31,16 @@ def text_chunks(text):
         chunks = text_splitter.split_text(text)
         return chunks
     return []
+import asyncio
+import sys
+
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 # function for embeddings
 def get_embeddings(text):
